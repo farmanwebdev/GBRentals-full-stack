@@ -82,15 +82,7 @@ npm run dev         # Start on :3000
 
 ---
 
-## 🧪 Demo Credentials (after seeding)
 
-| Role | Email | Password |
-|---|---|---|
-| Admin | admin@gbrentals.com | admin123 |
-| Owner | owner@gbrentals.com | owner123 |
-| User | user@gbrentals.com | user123 |
-
----
 
 ## 📡 API Endpoints
 
