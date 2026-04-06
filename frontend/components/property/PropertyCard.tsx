@@ -5,6 +5,7 @@ import { Heart, MapPin, Bed, Bath, Square, Eye, Clock, XCircle } from 'lucide-re
 import { Property } from '@/types';
 import { favoriteAPI } from '@/lib/api';
 import { useAuthStore } from '@/lib/store';
+import { normalizeImageUrl, isLocalBackendImage } from '@/lib/image';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -36,8 +37,9 @@ export default function PropertyCard({ property, onFavoriteToggle }: Props) {
 
   const isLocked    = property.status === 'sold' || property.status === 'rented';
   const isInactive  = property.status === 'pending' || property.status === 'rejected';
-  const imgSrc      = property.images?.[0]?.url ||
+  const rawImgSrc   = property.images?.[0]?.url ||
     'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800';
+  const imgSrc      = normalizeImageUrl(rawImgSrc);
 
   const handleFav = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -65,7 +67,7 @@ export default function PropertyCard({ property, onFavoriteToggle }: Props) {
           src={imgSrc}
           alt={property.title}
           fill
-          unoptimized={imgSrc.startsWith('http://localhost')}
+          unoptimized={isLocalBackendImage(imgSrc)}
           className={`object-cover transition-transform duration-700 group-hover:scale-110 ${isInactive ? 'opacity-60' : ''}`}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />

@@ -11,6 +11,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: '**.cloudinary.com' },
       { protocol: 'https', hostname: '**.unsplash.com' },
+      { protocol: 'http', hostname: 'localhost', port: '5000' },
     ],
   },
   env: {

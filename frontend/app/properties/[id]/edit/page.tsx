@@ -7,6 +7,7 @@ import { ArrowLeft, Upload, X, AlertCircle, CheckCircle } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
 import AuthProvider from '@/components/ui/AuthProvider';
 import { propertyAPI } from '@/lib/api';
+import { normalizeImageUrl, isLocalBackendImage } from '@/lib/image';
 import { useAuthStore } from '@/lib/store';
 import { Property } from '@/types';
 import toast from 'react-hot-toast';
@@ -324,7 +325,7 @@ export default function EditPropertyPage() {
                     <div className={`grid grid-cols-3 sm:grid-cols-5 gap-3 ${!keepExisting ? 'opacity-40' : ''}`}>
                       {property.images.map((img, i) => (
                         <div key={i} className="relative aspect-square rounded-xl overflow-hidden">
-                          <Image src={img.url} alt="" fill className="object-cover" sizes="100px" unoptimized />
+                          <Image src={normalizeImageUrl(img.url)} alt="" fill className="object-cover" sizes="100px" unoptimized={isLocalBackendImage(normalizeImageUrl(img.url))} />
                           {i === 0 && <span className="absolute bottom-1 left-1 bg-[#131849] text-white text-xs px-2 py-0.5 rounded-full">Cover</span>}
                         </div>
                       ))}

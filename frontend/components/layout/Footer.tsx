@@ -44,11 +44,11 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-white/60">
               <li className="flex items-start gap-3">
                 <MapPin size={16} className="text-yellow-400 shrink-0 mt-0.5" />
-                <span>123 Elite Avenue, Suite 400<br />New York, NY 10001</span>
+                <span>Gilgit-Baltistan<br />Pakistan</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={16} className="text-yellow-400 shrink-0" />
-                <span>+1 (555) 123-4567</span>
+                <span>+92 (555) 123-4567</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={16} className="text-yellow-400 shrink-0" />

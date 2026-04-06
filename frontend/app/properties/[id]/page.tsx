@@ -9,6 +9,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import AuthProvider from '@/components/ui/AuthProvider';
 import { propertyAPI, inquiryAPI, favoriteAPI } from '@/lib/api';
+import { normalizeImageUrl, isLocalBackendImage } from '@/lib/image';
 import { useAuthStore } from '@/lib/store';
 import { Property } from '@/types';
 import toast from 'react-hot-toast';
@@ -88,13 +89,13 @@ export default function PropertyDetailPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 rounded-2xl overflow-hidden">
               <div className="md:col-span-2 relative h-72 md:h-[480px]">
-                <Image src={images[activeImg]?.url} alt={property.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 66vw" unoptimized={images[activeImg]?.url.startsWith('http://localhost')}/>
+                <Image src={normalizeImageUrl(images[activeImg]?.url)} alt={property.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 66vw" unoptimized={isLocalBackendImage(normalizeImageUrl(images[activeImg]?.url))}/>
                 <div className={`absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-bold border ${STATUS_STYLES[property.status]}`}>{STATUS_LABELS[property.status]}</div>
               </div>
               <div className="hidden md:grid grid-rows-3 gap-3 h-[480px]">
                 {images.slice(1,4).map((img,i)=>(
                   <div key={i} onClick={()=>setActiveImg(i+1)} className="relative cursor-pointer overflow-hidden rounded-xl hover:opacity-90 transition-opacity">
-                    <Image src={img.url} alt="" fill className="object-cover" sizes="33vw" unoptimized={img.url.startsWith('http://localhost')}/>
+                    <Image src={normalizeImageUrl(img.url)} alt="" fill className="object-cover" sizes="33vw" unoptimized={isLocalBackendImage(normalizeImageUrl(img.url))}/>
                   </div>
                 ))}
               </div>
@@ -103,7 +104,7 @@ export default function PropertyDetailPage() {
               <div className="flex gap-2 mt-3 overflow-x-auto pb-1">
                 {images.map((img,i)=>(
                   <button key={i} onClick={()=>setActiveImg(i)} className={`relative w-16 h-16 rounded-xl overflow-hidden shrink-0 transition-all ${activeImg===i?'ring-2 ring-[#131849] ring-offset-1':'opacity-60 hover:opacity-100'}`}>
-                    <Image src={img.url} alt="" fill className="object-cover" sizes="64px" unoptimized={img.url.startsWith('http://localhost')}/>
+                    <Image src={normalizeImageUrl(img.url)} alt="" fill className="object-cover" sizes="64px" unoptimized={isLocalBackendImage(normalizeImageUrl(img.url))}/>
                   </button>
                 ))}
               </div>

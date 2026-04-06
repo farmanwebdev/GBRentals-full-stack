@@ -11,6 +11,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import AuthProvider from '@/components/ui/AuthProvider';
 import { adminAPI } from '@/lib/api';
+import { normalizeImageUrl, isLocalBackendImage } from '@/lib/image';
 import { useAuthStore } from '@/lib/store';
 import { Property, User } from '@/types';
 import toast from 'react-hot-toast';
@@ -209,7 +210,7 @@ export default function AdminDashboard() {
                   ) : stats?.pendingProperties?.slice(0,5).map((p: Property) => (
                     <div key={p._id} className="flex items-center gap-3 py-3 border-b border-amber-100 last:border-0">
                       <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-gray-100">
-                        {p.images?.[0] && <Image src={p.images[0].url} alt="" fill className="object-cover" sizes="48px" unoptimized/>}
+                        {p.images?.[0] && <Image src={normalizeImageUrl(p.images[0].url)} alt="" fill className="object-cover" sizes="48px" unoptimized={isLocalBackendImage(normalizeImageUrl(p.images[0].url))}/>}
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-semibold text-gray-800 truncate">{p.title}</p>
@@ -287,7 +288,7 @@ export default function AdminDashboard() {
                           <td className="px-5 py-4">
                             <div className="flex items-center gap-3">
                               <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-gray-100 shrink-0">
-                                {p.images?.[0] && <Image src={p.images[0].url} alt="" fill className="object-cover" sizes="40px" unoptimized/>}
+                                {p.images?.[0] && <Image src={normalizeImageUrl(p.images[0].url)} alt="" fill className="object-cover" sizes="40px" unoptimized={isLocalBackendImage(normalizeImageUrl(p.images[0].url))}/>}
                               </div>
                               <div>
                                 <p className="text-sm font-semibold text-gray-800 line-clamp-1">{p.title}</p>
