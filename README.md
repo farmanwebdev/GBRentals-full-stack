@@ -214,19 +214,7 @@ status: "approved"  status: "rejected"
 Visible on           Owner sees
 public site          rejection reason
                      Can fix & resubmit
-```
 
-### Status Meanings
-| Status | Who sets it | Public visibility |
-|---|---|---|
-| `pending` | System (on create) | ❌ Hidden |
-| `approved` | Admin | ✅ Visible |
-| `rejected` | Admin (with reason) | ❌ Hidden |
-| `rented` | Owner (after approved) | ✅ Visible (locked) |
-| `sold` | Owner (after approved) | ✅ Visible (locked) |
-
-### Image Upload
-- **With Cloudinary configured**: Images upload to cloud CDN
 - **Without Cloudinary** (local dev): Falls back to local disk storage at `/uploads/`
   - Images served at `http://localhost:5000/uploads/filename.jpg`
   - No config needed to get started!
